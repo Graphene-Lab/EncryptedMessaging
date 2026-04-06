@@ -27,7 +27,7 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-		<RepositoryUrl>https://github.com/Andrea-Bruno/EncryptedMessaging/tree/master/CommunicationChannel</RepositoryUrl>
+		<RepositoryUrl>https://github.com/Graphene-Lab/EncryptedMessaging/tree/master/CommunicationChannel</RepositoryUrl>
 	</PropertyGroup>
 
 	<Target Name="SetPackageVersion" DependsOnTargets="Build">

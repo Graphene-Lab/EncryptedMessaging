@@ -105,7 +105,7 @@
 	<PropertyGroup>
 		<GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);SetPackageVersion</GenerateNuspecDependsOn>
 		<Copyright>Andrea Bruno</Copyright>
-		<RepositoryUrl>https://github.com/Andrea-Bruno/EncryptedMessaging/tree/master/EncryptedMessaging</RepositoryUrl>
+		<RepositoryUrl>https://github.com/Graphene-Lab/EncryptedMessaging/tree/master/EncryptedMessaging</RepositoryUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 	</PropertyGroup>

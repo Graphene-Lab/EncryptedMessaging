@@ -64,6 +64,10 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\..\FullDuplexStreamSupport\FullDuplexStreamSupport.csproj" />
+	  <!-- Dual-reference pattern: the local sibling project wins in solution builds; the
+	       published NuGet package is restored when the sibling is absent (public CI builds
+	       cannot check out the private FullDuplexStreamSupport repo). -->
+	  <ProjectReference Include="..\..\FullDuplexStreamSupport\FullDuplexStreamSupport.csproj" Condition="Exists('..\..\FullDuplexStreamSupport\FullDuplexStreamSupport.csproj')" />
+	  <PackageReference Include="FullDuplexStreamSupport" Version="1.*" Condition="!Exists('..\..\FullDuplexStreamSupport\FullDuplexStreamSupport.csproj')" />
 	</ItemGroup>
 </Project>

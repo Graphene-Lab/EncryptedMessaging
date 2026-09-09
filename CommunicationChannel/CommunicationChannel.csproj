@@ -32,9 +32,8 @@
 
 	<Target Name="SetPackageVersion" DependsOnTargets="Build">
 		<PropertyGroup>
-			<!-- <PackageVersion>$([System.DateTime]::Now.ToString(&quot;yyyy.MM.dd.HHmmss&quot;))</PackageVersion> -->
-			<!-- You can customize the format and the rule about how version increases here. -->
-			<PackageVersion>$([System.DateTime]::Now.ToString("1.yy.MM.dd"))</PackageVersion>
+			<!-- Date-based default only when no explicit version was passed (CI tag v1.yy.MM.dd wins). -->
+			<PackageVersion Condition="'$(PackageVersion)' == ''">$([System.DateTime]::Now.ToString("1.yy.MM.dd"))</PackageVersion>
 		</PropertyGroup>
 	</Target>
 

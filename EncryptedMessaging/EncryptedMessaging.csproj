@@ -40,7 +40,11 @@
 	  <PackageReference Include="BytesExtension" Version="1.24.9.13" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\SecureStorage\SecureStorage.csproj" />
+	  <!-- Dual-reference pattern: the local sibling project wins in solution builds; the
+	       published NuGet package is restored when the sibling is absent (public CI builds
+	       cannot check out the SecureStorage repo). -->
+	  <ProjectReference Include="..\..\SecureStorage\SecureStorage.csproj" Condition="Exists('..\..\SecureStorage\SecureStorage.csproj')" />
+	  <PackageReference Include="SecureStorage" Version="1.*" Condition="!Exists('..\..\SecureStorage\SecureStorage.csproj')" />
 	  <ProjectReference Include="..\CommunicationChannel\CommunicationChannel.csproj" />
 	</ItemGroup>
 	<ItemGroup>
@@ -112,9 +116,8 @@
 
 	<Target Name="SetPackageVersion" DependsOnTargets="Build">
 		<PropertyGroup>
-			<!-- <PackageVersion>$([System.DateTime]::Now.ToString(&quot;yyyy.MM.dd.HHmmss&quot;))</PackageVersion> -->
-			<!-- You can customize the format and the rule about how version increases here. -->
-			<PackageVersion>$([System.DateTime]::Now.ToString("1.yy.MM.dd"))</PackageVersion>
+			<!-- Date-based default only when no explicit version was passed (CI tag v1.yy.MM.dd wins). -->
+			<PackageVersion Condition="'$(PackageVersion)' == ''">$([System.DateTime]::Now.ToString("1.yy.MM.dd"))</PackageVersion>
 		</PropertyGroup>
 	</Target>
 

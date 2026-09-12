@@ -198,10 +198,6 @@ namespace EncryptedMessaging.DataChannel
         {
             Connect();
             var targetUrl = new Uri(ServerUri, Segment(dataFlags));
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(targetUrl);
-            request.Method = "POST";
-            request.ContentType = "application/octet-stream";
-            request.ContentLength = data.Length;
             bool succssful = true;
             int attempts = 0;
             const int maxAttempts = 5;
@@ -210,6 +206,10 @@ namespace EncryptedMessaging.DataChannel
                 try
                 {
                     attempts++;
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(targetUrl);
+                    request.Method = "POST";
+                    request.ContentType = "application/octet-stream";
+                    request.ContentLength = data.Length;
                     using (Stream requestStream = request.GetRequestStream())
                     {
                         requestStream.Write(data, 0, data.Length);
